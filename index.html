@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metronome</title>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!--Import materialize.css-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="./node_modules/materialize-css/dist/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <link rel="stylesheet" href="./assets/css/stylesheet.css" />
+    <script src="./assets/js/main.js" defer type="module"></script>
+  </head>
+  <body data-body class="">
+    <header data-header class="header teal">
+      <h1 class="teal-text text-lighten-5">Metronome</h1>
+      <button data-theme class="btn-small teal teal-text text-lighten-5">
+        <i class="tiny material-icons left">brightness_medium</i> Dark Mode
+      </button>
+    </header>
+
+    <div data-main class="main">
+      <form data-counter class="counter container center-align">
+        <input
+          data-counter-input
+          value="120"
+          id="counterValue"
+          type="number"
+          class="teal-text center-align"
+        />
+        <h2 data-tempo-italian class="teal-text">Allegro</h2>
+      </form>
+      <div data-controls class="controls container center-align">
+        <div class="flex">
+          <button
+            data-subtract
+            class="btn-floating teal teal-text text-lighten-5"
+          >
+            -
+          </button>
+          <div class="slide">
+            <input
+              data-slider
+              type="range"
+              min="20"
+              max="240"
+              value="120"
+              class="range-field"
+              id="myRange"
+            />
+          </div>
+          <button data-add class="btn-floating teal teal-text text-lighten-5">
+            +
+          </button>
+        </div>
+        <div>
+          <button data-start class="btn teal teal-text text-lighten-5">
+            Start
+          </button>
+          <button data-reset class="btn teal teal-text text-lighten-5">
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer
+      data-footer
+      class="page-footer teal teal-text text-lighten-5 center-align"
+    >
+      <h6>A Javascript metronome.</h6>
+    </footer>
+  </body>
+</html>
