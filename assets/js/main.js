@@ -16,7 +16,7 @@ const volumeSlider = document.querySelector('[data-volume-slider]');
 
 export let tempo = 120; // Beats Per Minute. Default 120
 export const frequency = 600;
-export let volume = 0.5;
+export let volume = 1;
 
 setup(); // Needs to run on init
 
