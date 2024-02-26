@@ -1,63 +1,67 @@
 /* --- COLORING --- */
-input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	background-color: rgb(168, 167, 167);
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: rgb(168, 167, 167);
 }
 
 /* --- SIZING & ALIGNMENT --- */
 h1,
 h2,
 h6 {
-	margin: 10px;
+  margin: 10px;
 }
 
 header h1 {
-	font-size: 2rem;
+  font-size: 2rem;
 }
 
 .counter h1 {
-	font-size: 5rem;
+  font-size: 5rem;
 }
 
 .counter h2 {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 body {
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .main {
-	flex: 1 0 auto;
-	margin-top: 100px;
+  flex: 1 0 auto;
+  margin-top: 100px;
 }
 
 .header {
-	height: 55px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 20px 0 20px;
+  height: 55px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 20px;
 }
 
 .flex {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	gap: 10px;
-	margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .slide {
-	width: 250px;
+  width: 250px;
 }
 
 #counterValue {
-	font-size: 7rem;
-	height: 100px;
-	width: 300px;
-	border: none;
+  font-size: 7rem;
+  height: 100px;
+  width: 300px;
+  border: none;
+}
+
+.hidden {
+  display: none;
 }

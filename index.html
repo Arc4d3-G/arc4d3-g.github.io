@@ -21,6 +21,7 @@
         <i class="tiny material-icons left">brightness_medium</i> Dark Mode
       </button>
     </header>
+
     <div data-main class="main">
       <form data-counter class="counter container center-align">
         <input
@@ -37,7 +38,7 @@
           <button data-subtract class="btn-floating teal teal-text text-lighten-5">-</button>
           <div class="slide">
             <input
-              data-slider
+              data-tempo-slider
               type="range"
               min="20"
               max="240"
@@ -51,6 +52,21 @@
         <div>
           <button data-start class="btn teal teal-text text-lighten-5">Start</button>
           <button data-reset class="btn teal teal-text text-lighten-5">Reset</button>
+          <button data-settings class="btn teal teal-text text-lighten-5">Settings</button>
+        </div>
+        <div data-settings-panel class="flex container hidden">
+          <div class="slide">
+            <label>Volume</label>
+            <input
+              data-volume-slider
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              class="range-field"
+              id="volume"
+            />
+          </div>
         </div>
       </div>
     </div>

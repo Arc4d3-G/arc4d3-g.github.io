@@ -24,5 +24,4 @@ This project consists of a simple yet elegant metronome built using JavaScript, 
 ## How To Run
 
 - Clone the repository and cd into the `metronome` directory
-- Run `npm install` in the terminal to install the [Materialize CSS Framework](https://materializecss.com/) dependency
 - Use a local server and browser to open the index.html or, if using VSCode, use the [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)

@@ -1,58 +1,64 @@
-import themeToggle from "./themetoggle.js";
-import { setup, updateTempo, ac } from "./metronome.js";
+import themeToggle from './themetoggle.js';
+import { setup, updateTempo, ac, updateVolume } from './metronome.js';
 
-const tempoForm = document.querySelector("[data-counter]");
-const tempoInput = document.querySelector("[data-counter-input]");
-const slider = document.querySelector("[data-slider]");
-const addButton = document.querySelector("[data-add]");
-const subtractButton = document.querySelector("[data-subtract]");
-const resetButton = document.querySelector("[data-reset]");
-const tempoItalianName = document.querySelector("[data-tempo-italian]");
-const themeButton = document.querySelector("[data-theme]");
-const startButton = document.querySelector("[data-start]");
+const tempoForm = document.querySelector('[data-counter]');
+const tempoInput = document.querySelector('[data-counter-input]');
+const tempoSlider = document.querySelector('[data-tempo-slider]');
+const addButton = document.querySelector('[data-add]');
+const subtractButton = document.querySelector('[data-subtract]');
+const resetButton = document.querySelector('[data-reset]');
+const tempoItalianName = document.querySelector('[data-tempo-italian]');
+const themeButton = document.querySelector('[data-theme]');
+const startButton = document.querySelector('[data-start]');
+const settingsButton = document.querySelector('[data-settings]');
+const settingsPanel = document.querySelector('[data-settings-panel]');
+const volumeSlider = document.querySelector('[data-volume-slider]');
 
 export let tempo = 120; // Beats Per Minute. Default 120
+export const frequency = 600;
+export let volume = 0.5;
 
 setup(); // Needs to run on init
 
 /**
  * Triggers {@link themeSwitch}, which toggles the theme between light and dark.
  */
-themeButton.addEventListener("click", themeToggle);
+themeButton.addEventListener('click', themeToggle);
 
 /**
  * Sets the counter to display the Italian name for the current tempo value.
  */
 const setTempoItalian = () => {
-  let name = "";
+  let name = '';
   if (tempo >= 20 && tempo < 40) {
-    name = "Grave";
+    name = 'Grave';
   } else if (tempo >= 40 && tempo < 60) {
-    name = "Largo";
+    name = 'Largo';
   } else if (tempo >= 60 && tempo < 66) {
-    name = "Larghetto";
+    name = 'Larghetto';
   } else if (tempo >= 66 && tempo < 76) {
-    name = "Adagio";
+    name = 'Adagio';
   } else if (tempo >= 76 && tempo < 108) {
-    name = "Andante";
+    name = 'Andante';
   } else if (tempo >= 108 && tempo < 120) {
-    name = "Moderato";
+    name = 'Moderato';
   } else if (tempo >= 120 && tempo < 156) {
-    name = "Allegro";
+    name = 'Allegro';
   } else if (tempo >= 156 && tempo < 176) {
-    name = "Vivace";
+    name = 'Vivace';
   } else if (tempo >= 176 && tempo < 200) {
-    name = "Presto";
+    name = 'Presto';
   } else if (tempo >= 200) {
-    name = "Prestissimo";
+    name = 'Prestissimo';
   }
   tempoItalianName.innerText = name;
 };
 
 /**
- * This function sets the tempo counter (or input field, rather) to the user input value and returns the new
- * value as variable {@link tempo}. If the input value is less than 20 or more than 240, it gets clamped to
- * the min or max value respectively. The function also sets the tempo slider value to reflect the new input value.
+ * This function sets the tempo counter (or input field, rather) to the user input value and
+ * returns the new value as variable {@link tempo}. If the input value is less than 20 or
+ * more than 240, it gets clamped to the min or max value respectively. The function also
+ * sets the tempo slider value to reflect the new input value.
  * @param {*} event
  * @returns {number}
  */
@@ -66,25 +72,25 @@ const submitHandler = (event) => {
     tempo = tempoInput.value;
   }
   tempoInput.value = tempo;
-  slider.value = tempo;
+  tempoSlider.value = tempo;
   setTempoItalian();
   updateTempo();
   return tempo;
 };
-tempoForm.addEventListener("submit", submitHandler);
+tempoForm.addEventListener('submit', submitHandler);
 
 /**
  * Sets the tempo variable and counter equal to the slider value, updating it as you drag.
  * @returns {number} tempo
  */
 const setCounterSlider = () => {
-  tempo = slider.value;
-  tempoInput.value = slider.value;
+  tempo = tempoSlider.value;
+  tempoInput.value = tempoSlider.value;
   setTempoItalian();
   updateTempo();
   return tempo;
 };
-slider.addEventListener("input", setCounterSlider);
+tempoSlider.addEventListener('input', setCounterSlider);
 
 /**
  * Plus button increases the tempo variable and counter by 1, and sets the input and
@@ -93,16 +99,16 @@ slider.addEventListener("input", setCounterSlider);
  */
 const addHandler = () => {
   if (tempo >= 240) {
-    return;
+    return tempo;
   }
   tempo++;
   tempoInput.value = tempo;
-  slider.value = tempo;
+  tempoSlider.value = tempo;
   setTempoItalian();
   updateTempo();
   return tempo;
 };
-addButton.addEventListener("click", addHandler);
+addButton.addEventListener('click', addHandler);
 
 /**
  * Minus button decreases the tempo variable and counter by 1, and sets the input and
@@ -111,16 +117,16 @@ addButton.addEventListener("click", addHandler);
  */
 const subtractHandler = () => {
   if (tempo <= 20) {
-    return;
+    return tempo;
   }
   tempo--;
   tempoInput.value = tempo;
-  slider.value = tempo;
+  tempoSlider.value = tempo;
   setTempoItalian();
   updateTempo();
   return tempo;
 };
-subtractButton.addEventListener("click", subtractHandler);
+subtractButton.addEventListener('click', subtractHandler);
 
 /**
  * Toggles the start (resume) and stop (suspend) of the AudioContext, and changes
@@ -128,15 +134,16 @@ subtractButton.addEventListener("click", subtractHandler);
  */
 const startHandler = () => {
   updateTempo();
-  if (ac.state === "running") {
+  if (ac.state === 'running') {
     ac.suspend();
-    startButton.innerText = "start";
+    startButton.innerText = 'start';
   } else {
     ac.resume();
-    startButton.innerText = "stop";
+    startButton.innerText = 'stop';
   }
+  console.log(volume);
 };
-startButton.addEventListener("click", startHandler);
+startButton.addEventListener('click', startHandler);
 
 /**
  * Reset button sets all values back to their initial state and suspends the AudioContext.
@@ -144,10 +151,35 @@ startButton.addEventListener("click", startHandler);
 const resetHandler = () => {
   tempo = 120;
   tempoInput.value = tempo;
-  slider.value = tempo;
+  tempoSlider.value = tempo;
   setTempoItalian();
   updateTempo();
   ac.suspend();
-  startButton.innerText = "start";
+  startButton.innerText = 'start';
 };
-resetButton.addEventListener("click", resetHandler);
+resetButton.addEventListener('click', resetHandler);
+
+/**
+ * Toggle settings panel hidden or not
+ */
+const settingsHandler = () => {
+  if (settingsPanel.classList.contains('hidden')) {
+    settingsPanel.classList.remove('hidden');
+  } else {
+    settingsPanel.classList.add('hidden');
+  }
+};
+
+settingsButton.addEventListener('click', settingsHandler);
+
+/**
+ * Sets the volume variable equal to the slider value, updating it as you drag.
+ * @returns {number} tempo
+ */
+const setVolumeSlider = () => {
+  volume = volumeSlider.value / 100;
+  console.log(volume);
+  updateVolume();
+  return volume;
+};
+volumeSlider.addEventListener('input', setVolumeSlider);
