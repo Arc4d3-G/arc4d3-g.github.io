@@ -141,7 +141,6 @@ const startHandler = () => {
     ac.resume();
     startButton.innerText = 'stop';
   }
-  console.log(volume);
 };
 startButton.addEventListener('click', startHandler);
 
